@@ -5,20 +5,33 @@ const mongoose = require("mongoose");
 //     title: string   
 //     author: string
 //     genre: string
-const seasonSchema = new mongoose.Schema({
-    country: {
+const seasonSchema = new mongoose.Schema([
+    {country: {
         type: String,
         required: true,
         unique: false
-    },
-    seasonNumber: {
+    }},
+    {seasonNumber: {
         type: Number,
         required: true,
         unique: false
+    }}
+]);
+
+const talentSchema = new mongoose.Schema({
+    first: {
+        type: String,
+        required: true
+    },
+    second: {
+        type: String,
+        required: false
+    },
+    third: {
+        type: String,
+        required: false
     }
 });
-
-const talentSchema = new mongoose.Schema([]);
 
 const dragqueenSchema = new mongoose.Schema ({
     name: {
