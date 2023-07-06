@@ -1,15 +1,12 @@
 const express = require("express");
 const app = express();
-// const DragQueen = require("./dragqueens/model");
-const DragQueen = require("./modeldragQueens/model");
-const dragqueenRouter = require("./modeldragQueens/routes");
-
+const DragQueen = require("./dragQueens/model");
+const dragqueenRouter = require("./dragQueens/routes");
 require("dotenv").config();
 require("./db/connection");
 
 // app.use("/dragqueens", express.static("dragqueens"));
 app.use(express.json())
-
 app.use(dragqueenRouter);
 
 app.put("/dragqueens/updateauthor", async (request, response) => {
