@@ -1,19 +1,5 @@
 const mongoose = require("mongoose");
 
-
-// const seasonSchema = new mongoose.Schema({
-//         country: {
-//             type: String,
-//             required: false,
-//             unique: false
-//         },
-//         seasonNumber: {
-//             type: String,
-//             required: false,
-//             unique: false
-//         },
-// });
-
 const seasonSchema = new mongoose.Schema({
         country: String,
         seasonNumber: Number,

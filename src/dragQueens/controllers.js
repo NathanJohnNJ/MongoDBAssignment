@@ -34,19 +34,35 @@ const addQueen = async (req, res) => {
 };
 const updateQueen = async (req, res) => {
     try {
-        const updateField = req.body.updateField;
         const updatedQueen = await DragQueen.updateOne(
             { name: req.body.name },
-            { $set :{ updateField: req.body.update }
+            { $set :{ winner: req.body.update }
         });
         const successResponse = {
-            message: `${req.body.name}'s ${updateField} successfully updated.`,
+            message: `${req.body.name}'s winner field successfully updated to ${req.body.update}.`,
+            updatedQueen: updatedQueen
         }
         res.send(successResponse);
     } catch (error) {
         console.log(error);
     } 
 };
+// const updateField = async (req, res) => {
+//     console.log(req.body.key);
+//     try {
+//         const updatedField = await DragQueen.findOneAndUpdate(
+//             { name: req.body.name },
+//             { key: req.body.key},
+//             { update: req.body.update }
+//         );
+//         const successResponse = {
+//             message: `${updatedField.name}'s ${req.body.key} field successfully updated to ${req.body.update}.`
+//         }
+//         res.send(successResponse);
+//     } catch (error) {
+//         console.log(error);
+//     } 
+// };
 const deleteQueen = async (req, res) => {
     try {
         const deletedQueen = await DragQueen.deleteOne({
@@ -61,10 +77,24 @@ const deleteQueen = async (req, res) => {
         console.log(error);
     }
 };
+const deleteAll = async (req, res) => {
+    try {
+        const deleted = await DragQueen.deleteMany({})
+        const successResponse = {
+            message: `All records successfully deleted.`,
+            deleted: deleted
+        }
+        res.send(successResponse);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 module.exports = {
     getAllQueens,
     addQueen,
     updateQueen,
-    deleteQueen
+    deleteQueen,
+    // updateField,
+    deleteAll
 };
