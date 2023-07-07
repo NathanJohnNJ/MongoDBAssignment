@@ -1,6 +1,6 @@
 const DragQueen = require("./model")
 
-const getAllDragQueens = async (req, res) => {
+const getAllQueens = async (req, res) => {
     try {
         const dragqueens = await DragQueen.find({});
     const successResponse = {
@@ -13,50 +13,48 @@ const getAllDragQueens = async (req, res) => {
     }
 };
 
-const addDragQueen = async (req, res) => {
+const addQueen = async (req, res) => {
     try {
-        const newDragQueen = await DragQueen.create({
+        const newQueen = await DragQueen.create({
             name: req.body.name,
-            season: [
-                {country: req.body.season.country},
-                {seasonNumber: req.body.season.seasonNumber}
-            ],
+            season: req.body.season,
             city: req.body.city,
             talents: req.body.talents,
-            winner: req.body.winner
+            winner: req.body.winner,
+            url: req.body.url
         })
         const successResponse = {
-            message: "${req.body.title} successfully added.",
-            newDragQueen: newDragQueen
+            message: `${req.body.name} successfully added.`,
+            newQueen: newQueen
         }
         res.status(200).json(successResponse);
     } catch (error) {
         console.log(error);
     }
 };
-const updateDragQueen = async (req, res) => {
+const updateQueen = async (req, res) => {
     try {
-        const updatedDragQueen = await DragQueen.updateOne(
+        const updateField = req.body.updateField;
+        const updatedQueen = await DragQueen.updateOne(
             { name: req.body.name },
-            { $set :{ author: req.body.author }
-        })
+            { $set :{ updateField: req.body.update }
+        });
         const successResponse = {
-            message: "${req.body.name} successfully updated.",
-            newDragQueen: updatedDragQueen
+            message: `${req.body.name}'s ${updateField} successfully updated.`,
         }
         res.send(successResponse);
     } catch (error) {
         console.log(error);
     } 
 };
-const deleteDragQueen = async (req, res) => {
+const deleteQueen = async (req, res) => {
     try {
-        const deletedDragQueen = await DragQueen.deleteOne({
+        const deletedQueen = await DragQueen.deleteOne({
             name: req.body.name,
         })
         const successResponse = {
             message: `${req.body.name} successfully deleted.`,
-            newDragQueen: deletedDragQueen
+            deletedQueen: deletedQueen
         }
         res.send(successResponse);
     } catch (error) {
@@ -65,8 +63,8 @@ const deleteDragQueen = async (req, res) => {
 };
 
 module.exports = {
-    getAllDragQueens,
-    addDragQueen,
-    updateDragQueen,
-    deleteDragQueen
+    getAllQueens,
+    addQueen,
+    updateQueen,
+    deleteQueen
 };

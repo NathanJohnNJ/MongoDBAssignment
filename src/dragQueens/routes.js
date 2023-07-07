@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const dragqueenRouter = Router()
-const { getAllDragQueens, addDragQueen, updateDragQueen, deleteDragQueen } = require("./controllers");
+const queenRouter = Router()
+const { getAllQueens, addQueen, updateQueen, deleteQueen } = require("./controllers");
 
-dragqueenRouter.get("/dragqueens/getalldragqueens", getAllDragQueens);
-dragqueenRouter.post("/dragqueens/adddragqueen", addDragQueen);
-dragqueenRouter.put("/draggqueens/updatedragqueen", updateDragQueen);
-dragqueenRouter.delete("/draggqueens/deletedragqueen", deleteDragQueen);
+queenRouter.get("/dragqueens/getallqueens", getAllQueens);
+queenRouter.post("/dragqueens/addqueen", addQueen);
+queenRouter.put("/dragqueens/updatequeen", updateQueen);
+queenRouter.delete("/dragqueens/deletequeen", deleteQueen);
 
-module.exports = dragqueenRouter;
+module.exports = queenRouter;

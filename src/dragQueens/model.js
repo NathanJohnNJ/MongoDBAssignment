@@ -1,39 +1,39 @@
 const mongoose = require("mongoose");
 
-// DragQueen:
-//     id: string - automatically created
-//     title: string   
-//     author: string
-//     genre: string
-const seasonSchema = new mongoose.Schema([
-    {country: {
-        type: String,
-        required: true,
-        unique: false
-    }},
-    {seasonNumber: {
-        type: Number,
-        required: true,
-        unique: false
-    }}
-]);
 
-const talentSchema = new mongoose.Schema({
-    first: {
-        type: String,
-        required: true
-    },
-    second: {
-        type: String,
-        required: false
-    },
-    third: {
-        type: String,
-        required: false
-    }
+// const seasonSchema = new mongoose.Schema({
+//         country: {
+//             type: String,
+//             required: false,
+//             unique: false
+//         },
+//         seasonNumber: {
+//             type: String,
+//             required: false,
+//             unique: false
+//         },
+// });
+
+const seasonSchema = new mongoose.Schema({
+        country: String,
+        seasonNumber: Number,
+        allStars: Boolean,
+        allStarsSeason: {
+            type: Number,
+            required: false
+        }
+  });
+
+const talentSchema = new mongoose.Schema({ 
+        first: {
+            type: String,
+            required: true
+        },
+        second: String,
+        third: String
 });
 
-const dragqueenSchema = new mongoose.Schema ({
+const queenSchema = new mongoose.Schema ({
     name: {
         type: String,
         required: true,
@@ -46,8 +46,12 @@ const dragqueenSchema = new mongoose.Schema ({
         unique: false
     },
     talents: [talentSchema],
-    winner: { Boolean }
+    winner: {
+     type: Boolean,
+     required: true
+    },
+    url: String
 });
 
-const DragQueen = mongoose.model("dragqueen", dragqueenSchema);
+const DragQueen = mongoose.model("dragqueen", queenSchema);
 module.exports = DragQueen;
